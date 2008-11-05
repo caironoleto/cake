@@ -1,0 +1,6 @@
+# cake 
+
+[cake][cake_url] is a generator to [CodeIgniter Framework][ci_url].
+
+[cake_url]: http://www.caironoleto.com/cake/
+[ci_url]: http://www.codeigniter.com/
