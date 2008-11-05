@@ -11,8 +11,9 @@ class Generate {
 	function start() {
 		return "CodeIgniter Generator";
 	}
-	function create($what, $name) {
+	function create($what, $name, $methods = null) {
 		$what = strtolower($what);
+		$name = strtolower($name);
 		if (!file_exists($this->basepath .'system/')) {
 			mkdir($this->basepath .'system/');
 			chmod($this->basepath .'system/', 0777);
@@ -34,9 +35,16 @@ class Generate {
 				fwrite($resource, "\tfunction $class" ."Controller() {\n");
 				fwrite($resource, "\t\tparent::Controller();\n");
 				fwrite($resource, "\t}\n");
+				if (is_array($methods)) {
+					foreach ($methods as $method) {
+						fwrite($resource, "\tfunction $method() {\n");
+						fwrite($resource, "\t}\n");
+					}
+				}
 				fwrite($resource, "}\n");
 				fwrite($resource, "?>");
 				fclose($resource);
+			break;
 		}
 	}
 }
