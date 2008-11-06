@@ -23,6 +23,10 @@ class GenerateTest extends PHPUnit_Framework_TestCase {
 		$this->generate->create('controller', 'user');
 		$this->assertFileExists('../system/application/controllers/UserController.php');
 	}
+	function testCreateAUserControllerAndIndexView() {
+		$this->generate->create('controller', 'user', array('index'));
+		$this->assertFileExists('../system/application/views/user_controller/index_view.php');
+	}
 	function testIfContentOfUserControllerIsUserClass() {
 		$this->generate->create('controller', 'USER');
 		$string = "<?php\nclass UserController extends Controller {\n\tfunction UserController() {\n\t\tparent::Controller();\n\t}\n}\n?>";

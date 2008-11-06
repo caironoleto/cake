@@ -18,17 +18,19 @@ class Generate {
 		$name = strtolower($name);
 		if (!file_exists($this->basepath .'system/')) {
 			mkdir($this->basepath .'system/');
-			chmod($this->basepath .'system/', 0777);
+			chmod($this->basepath .'system/', 0775);
 		}
 		if (!file_exists($this->basepath .'system/application/')) {
 			mkdir($this->basepath .'system/application/');
-			chmod($this->basepath .'system/application/', 0777);
+			chmod($this->basepath .'system/application/', 0775);
 		}
 		switch($what) {
 			case 'controller':
 				$path = $this->basepath .'system/application/controllers/';
-				if (!file_exists($path))
+				if (!file_exists($path)) {
 					mkdir($path);
+					chmod($this->basepath .'system/application/controllers/', 0775);
+				}
 				$class = ucfirst($name);
 				$file = $class .'Controller.php';
 				$resource = fopen($path .$file, 'w');
@@ -41,6 +43,17 @@ class Generate {
 					foreach ($methods as $method) {
 						fwrite($resource, "\tfunction $method() {\n");
 						fwrite($resource, "\t}\n");
+						$viewpath = $this->basepath .'system/application/views/';
+						if (!file_exists($viewpath)) {
+							mkdir($viewpath);
+							chmod($this->basepath .'system/application/views/', 0775);
+						}
+						$viewpath .= $name ."_controller/";
+						if (!file_exists($viewpath)) {
+							mkdir($viewpath);
+						}
+						$viewfile = $method ."_view.php";
+						$viewresource = fopen($viewpath .$viewfile, 'w');
 					}
 				}
 				fwrite($resource, "}\n");
