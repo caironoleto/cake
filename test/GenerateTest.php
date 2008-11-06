@@ -53,10 +53,10 @@ class GenerateTest extends PHPUnit_Framework_TestCase {
 	}
 	function testIfCanSetPath() {
 		$this->generate->setPath('../.');
-		$this->assertEquals('../.', $this->generate->basepath);
+		$this->assertEquals('../.', $this->generate->getPath());
 	}
 	function tearDown() {
-#		rm_recursive($this->generate->getPath());
+		rm_recursive($this->generate->getPath() ."/system");
 	}
 }
 ?>

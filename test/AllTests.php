@@ -11,6 +11,7 @@ class AllTests {
 		$path = dirname(__FILE__) ."/";
 		$files = array(
 			$path ."GenerateTest.php",
+			$path ."BinTest.php",
 		);
 		$suite->addTestFiles($files);
 		return $suite;
