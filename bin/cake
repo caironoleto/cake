@@ -1,0 +1,8 @@
+#!/usr/bin/php
+<?php
+require_once('Generate.php');
+$generate = new Generate();
+$generate->setPath($_SERVER['PWD']);
+if (isset($argv[1]) and isset($argv[2]))
+	$generate->create($argv[1], $argv[2]);
+?>

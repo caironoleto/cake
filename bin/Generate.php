@@ -3,13 +3,16 @@
 #	@author Cairo Noleto at Add4 Comunicação
 #	@site http://www.caironoleto.com/
 #	@email caironoleto@gmail.com
-require_once('../basepath.php');
+require_once('../config.php');
 class Generate {
-	private $basepath = BASEPATH;
+	private $basepath;
 	function Generate() {
 	}
-	function start() {
-		return "CodeIgniter Generator";
+	function setPath($path) {
+		$this->basepath = $path;
+	}
+	function getPath() {
+		return $this->basepath;
 	}
 	function create($what, $name, $methods = null) {
 		$what = strtolower($what);

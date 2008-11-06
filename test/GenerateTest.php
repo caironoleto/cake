@@ -1,16 +1,11 @@
 <?php
 require_once 'PHPUnit/Framework.php';
-require_once('../basepath.php');
+require_once('helper.php');
 class GenerateTest extends PHPUnit_Framework_TestCase {
 	function setUp() {
 		require_once('../bin/Generate.php');
 		$this->generate = new Generate();
-	}
-	function testIfGetHelpString() {
-		$this->assertType('string', $this->generate->start());
-	}
-	function testIfHelpStringEquals() {
-		$this->assertEquals('CodeIgniter Generator', $this->generate->start());
+		$this->generate->setPath('../');
 	}
 	function testCreateAWelcomeController() {
 		$this->generate->create('controller', 'welcome');
@@ -56,8 +51,12 @@ class GenerateTest extends PHPUnit_Framework_TestCase {
 		$string .= "}\n?>";
 		$this->assertStringEqualsFile('../system/application/controllers/WelcomeController.php', $string);
 	}
+	function testIfCanSetPath() {
+		$this->generate->setPath('../.');
+		$this->assertEquals('../.', $this->generate->basepath);
+	}
 	function tearDown() {
-		rm_recursive(BASEPATH .'system/');
+#		rm_recursive($this->generate->getPath());
 	}
 }
 ?>
