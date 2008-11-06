@@ -15,9 +15,9 @@
 
 ## Modes available:
 
-	* controller
-	
-	* model
+* controller
+
+* model
 
 ## Example:
 
@@ -72,10 +72,9 @@ Blog: [Cairo'sBlog][blog_url]
 
 Twitter: [@caironoleto][twitter_url]
 
-
 [twitter_url]: http://www.twitter.com/caironoleto
-[blog_url]: htt://www.caironoleto.com/
-[add4_url]: htt://www.add4.com.br/
+[blog_url]: http://www.caironoleto.com/
+[add4_url]: http://www.add4.com.br/
 [license_url]: http://creativecommons.org/licenses/by/3.0/
 [cake_url]: http://www.caironoleto.com/cake/
 [ci_url]: http://www.codeigniter.com/
