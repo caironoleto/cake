@@ -50,7 +50,6 @@ class Generate {
 					fwrite($resource, "\tfunction $class" ."Controller() {\n");
 					fwrite($resource, "\t\tparent::Controller();\n");
 					fwrite($resource, "\t}\n");
-					print "\t\tCreate system/application/controllers/$file\n";
 					if (is_array($methods)) {
 						foreach ($methods as $method) {
 							fwrite($resource, "\tfunction $method() {\n");
@@ -83,6 +82,7 @@ class Generate {
 					fwrite($resource, "?>");
 					fclose($resource);
 					chmod($path .$file, 0775);
+					print "\t\tCreate system/application/controllers/$file\n";
 				} else {
 					print "\t\tsystem/application/controllers/$file exists\n";
 				}
@@ -109,6 +109,7 @@ class Generate {
 						foreach ($methods as $method) {
 							fwrite($resource, "\tfunction $method() {\n");
 							fwrite($resource, "\t}\n");
+							print "\t\tAdd $method in $class\n";
 						}
 					}
 					fwrite($resource, "}\n");

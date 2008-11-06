@@ -2,5 +2,80 @@
 
 [cake][cake_url] is a generator to [CodeIgniter Framework][ci_url].
 
+## How to install?
+
+	git clone git://github.com/caironoleto/cake.git /home/yourUser/.cake
+	sudo ln /home/yourUser/.cake/bin/cake /usr/bin/cake
+	sudo ln /home/yourUser/.cake/bin/Generate.php /usr/bin/Generate.php
+
+## Usage:
+
+	cd /home/yourUser/codeIgniterPath/
+	cake [mode] [name] [method1] [method2] [method3]
+
+## Modes available:
+
+	* controller
+	
+	* model
+
+## Example:
+
+	cairo@lt:~/myProject$ cake controller home
+	cake by Cairo Noleto - http://www.caironoleto.com/
+
+			system/ exists
+			system/application/ exists
+			system/application/controllers/ exists
+			Create system/application/controllers/HomeController.php
+
+	cairo@lt:~/myProject$ cake controller home index
+	cake by Cairo Noleto - http://www.caironoleto.com/
+
+			system/ exists
+			system/application/ exists
+			system/application/controllers/ exists
+			Add index in HomeController
+			system/application/views/ exists
+			system/application/views/home_controller/ exists
+			Create system/application/views/home_controller/index_view.php
+			Create system/application/controllers/HomeController.php
+
+	cairo@lt:~/myProject$ cake model user
+	cake by Cairo Noleto - http://www.caironoleto.com/
+
+		system/ exists
+		system/application/ exists
+		system/application/models/ exists
+		Create system/application/models/User.php
+
+	cairo@lt:~/myProject$ cake model user find_all
+	cake by Cairo Noleto - http://www.caironoleto.com/
+
+			system/ exists
+			system/application/ exists
+			system/application/models/ exists
+			Add find_all in User
+			Create system/application/models/User.php
+
+## License:
+
+cake is released under [Creative Commons Attribution 3.0 Unported][license_url].
+
+## Author:
+
+### **Cairo Noleto**
+
+Working at [Add4 Comunicação][add4_url]
+
+Blog: [Cairo'sBlog][blog_url]
+
+Twitter: [@caironoleto][twitter_url]
+
+
+[twitter_url]: http://www.twitter.com/caironoleto
+[blog_url]: htt://www.caironoleto.com/
+[add4_url]: htt://www.add4.com.br/
+[license_url]: http://creativecommons.org/licenses/by/3.0/
 [cake_url]: http://www.caironoleto.com/cake/
 [ci_url]: http://www.codeigniter.com/
