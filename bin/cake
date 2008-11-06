@@ -1,5 +1,9 @@
 #!/usr/bin/php
 <?php
+#CodeIgniter Generate
+#	@author Cairo Noleto at Add4 Comunicação
+#	@site http://www.caironoleto.com/
+#	@email caironoleto@gmail.com
 require_once('Generate.php');
 $generate = new Generate();
 $generate->setPath($_SERVER['PWD']);
