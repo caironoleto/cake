@@ -3,13 +3,27 @@
 require_once('Generate.php');
 $generate = new Generate();
 $generate->setPath($_SERVER['PWD']);
-if (isset($argv[1]) and isset($argv[2]))
-	$generate->create($argv[1], $argv[2]);
+if (isset($argv[1]) and isset($argv[2])) {
+	$methods = array();
+	foreach($argv as $key => $value) {
+		switch($key) {
+			case 0:
+				break;
+			case 1:
+				$mode = $value;
+				break;
+			case 2:
+				$name = $value;
+				break;
+			default:
+				$methods[] = $value;
+		}
+	}
+	$generate->create($mode, $name, $methods);
+}
 else {
-	print "cake by Cairo Noleto - http://www.caironoleto.com/\n\n";
 	print "\tUsage: cake controller method1 method2 method3\n";
 	print "\tYou can use with\n";
 	print "\t\tcontroller model view\n";
-	print "\tWhere arg2:\n";
 }
 ?>
