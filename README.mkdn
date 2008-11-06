@@ -44,10 +44,10 @@
 	cairo@lt:~/myProject$ cake model user
 	cake by Cairo Noleto - http://www.caironoleto.com/
 
-		system/ exists
-		system/application/ exists
-		system/application/models/ exists
-		Create system/application/models/User.php
+			system/ exists
+			system/application/ exists
+			system/application/models/ exists
+			Create system/application/models/User.php
 
 	cairo@lt:~/myProject$ cake model user find_all
 	cake by Cairo Noleto - http://www.caironoleto.com/
