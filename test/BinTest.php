@@ -9,10 +9,10 @@ class BinTest extends PHPUnit_Framework_TestCase {
 	}
 	function testIfCanCreateAWelcomeController() {
 		echo exec('php ../bin/cake controller welcome');
-		$this->assertFileExists('../system/application/controllers/WelcomeController.php');
+		$this->assertFileExists('system/application/controllers/WelcomeController.php');
 	}
 	function tearDown() {
-		rm_recursive(BASEPATH .'system/');
+		rm_recursive('system');
 	}
 }
 ?>

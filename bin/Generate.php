@@ -9,7 +9,7 @@ class Generate {
 	function Generate() {
 	}
 	function setPath($path) {
-		$this->basepath = $path;
+		$this->basepath = $path ."/";
 	}
 	function getPath() {
 		return $this->basepath;

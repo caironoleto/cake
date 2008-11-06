@@ -5,4 +5,10 @@ $generate = new Generate();
 $generate->setPath($_SERVER['PWD']);
 if (isset($argv[1]) and isset($argv[2]))
 	$generate->create($argv[1], $argv[2]);
+else
+	print "USAGE:\n";
+	print "\tcake arg1 method1 method2 method3\n";
+	print "\tWhere arg1:\n";
+	print "\t\tcontroller model view\n";
+	print "\tWhere arg2:\n";
 ?>

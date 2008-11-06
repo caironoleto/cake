@@ -5,7 +5,7 @@ class GenerateTest extends PHPUnit_Framework_TestCase {
 	function setUp() {
 		require_once('../bin/Generate.php');
 		$this->generate = new Generate();
-		$this->generate->setPath('../');
+		$this->generate->setPath('..');
 	}
 	function testCreateAWelcomeController() {
 		$this->generate->create('controller', 'welcome');
@@ -53,10 +53,10 @@ class GenerateTest extends PHPUnit_Framework_TestCase {
 	}
 	function testIfCanSetPath() {
 		$this->generate->setPath('../.');
-		$this->assertEquals('../.', $this->generate->getPath());
+		$this->assertEquals('.././', $this->generate->getPath());
 	}
 	function tearDown() {
-		rm_recursive($this->generate->getPath() ."/system");
+		rm_recursive($this->generate->getPath() ."system");
 	}
 }
 ?>
