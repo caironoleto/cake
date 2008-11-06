@@ -3,7 +3,6 @@
 #	@author Cairo Noleto at Add4 Comunicação
 #	@site http://www.caironoleto.com/
 #	@email caironoleto@gmail.com
-require_once('../config.php');
 class Generate {
 	private $basepath;
 	function Generate() {
@@ -34,9 +33,31 @@ class Generate {
 				$file = $class .'Controller.php';
 				$resource = fopen($path .$file, 'w');
 				fwrite($resource, "<?php\n");
-				fwrite($resource, "class $class" ."Controller {\n");
+				fwrite($resource, "class $class" ."Controller extends Controller {\n");
 				fwrite($resource, "\tfunction $class" ."Controller() {\n");
 				fwrite($resource, "\t\tparent::Controller();\n");
+				fwrite($resource, "\t}\n");
+				if (is_array($methods)) {
+					foreach ($methods as $method) {
+						fwrite($resource, "\tfunction $method() {\n");
+						fwrite($resource, "\t}\n");
+					}
+				}
+				fwrite($resource, "}\n");
+				fwrite($resource, "?>");
+				fclose($resource);
+			break;
+			case 'model':
+				$path = $this->basepath .'system/application/models/';
+				if (!file_exists($path))
+					mkdir($path);
+				$class = ucfirst($name);
+				$file = $class .'.php';
+				$resource = fopen($path .$file, 'w');
+				fwrite($resource, "<?php\n");
+				fwrite($resource, "class $class extends Model {\n");
+				fwrite($resource, "\tfunction $class() {\n");
+				fwrite($resource, "\t\tparent::Model();\n");
 				fwrite($resource, "\t}\n");
 				if (is_array($methods)) {
 					foreach ($methods as $method) {

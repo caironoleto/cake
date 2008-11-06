@@ -7,13 +7,16 @@ class GenerateTest extends PHPUnit_Framework_TestCase {
 		$this->generate = new Generate();
 		$this->generate->setPath('..');
 	}
+	function tearDown() {
+		rm_recursive($this->generate->getPath() ."system");
+	}
 	function testCreateAWelcomeController() {
 		$this->generate->create('controller', 'welcome');
 		$this->assertFileExists('../system/application/controllers/WelcomeController.php');
 	}
 	function testIfContentOfWelcomeControllerIsWelcomeClass() {
 		$this->generate->create('controller', 'welcome');
-		$string = "<?php\nclass WelcomeController {\n\tfunction WelcomeController() {\n\t\tparent::Controller();\n\t}\n}\n?>";
+		$string = "<?php\nclass WelcomeController extends Controller {\n\tfunction WelcomeController() {\n\t\tparent::Controller();\n\t}\n}\n?>";
 		$this->assertStringEqualsFile('../system/application/controllers/WelcomeController.php', $string);
 	}
 	function testCreateAUserController() {
@@ -22,13 +25,13 @@ class GenerateTest extends PHPUnit_Framework_TestCase {
 	}
 	function testIfContentOfUserControllerIsUserClass() {
 		$this->generate->create('controller', 'USER');
-		$string = "<?php\nclass UserController {\n\tfunction UserController() {\n\t\tparent::Controller();\n\t}\n}\n?>";
+		$string = "<?php\nclass UserController extends Controller {\n\tfunction UserController() {\n\t\tparent::Controller();\n\t}\n}\n?>";
 		$this->assertStringEqualsFile('../system/application/controllers/UserController.php', $string);
 	}
 	function testIfCreateAIndexMethodInWelcomeController() {
 		$this->generate->create('controller', 'welcome', array('index'));
 		$string = "<?php\n";
-		$string .= "class WelcomeController {\n";
+		$string .= "class WelcomeController extends Controller {\n";
 		$string .= "\tfunction WelcomeController() {\n";
 		$string .= "\t\tparent::Controller();\n";
 		$string .= "\t}\n";
@@ -40,7 +43,7 @@ class GenerateTest extends PHPUnit_Framework_TestCase {
 	function testIfCreateAIndexMethodAndDestroyMethodInWelcomeController() {
 		$this->generate->create('controller', 'welcome', array('index', 'destroy'));
 		$string = "<?php\n";
-		$string .= "class WelcomeController {\n";
+		$string .= "class WelcomeController extends Controller {\n";
 		$string .= "\tfunction WelcomeController() {\n";
 		$string .= "\t\tparent::Controller();\n";
 		$string .= "\t}\n";
@@ -51,12 +54,35 @@ class GenerateTest extends PHPUnit_Framework_TestCase {
 		$string .= "}\n?>";
 		$this->assertStringEqualsFile('../system/application/controllers/WelcomeController.php', $string);
 	}
+	function testCreateAUserModel() {
+		$this->generate->create('model', 'user');
+		$this->assertFileExists('../system/application/models/User.php');
+	}
 	function testIfCanSetPath() {
 		$this->generate->setPath('../.');
 		$this->assertEquals('.././', $this->generate->getPath());
 	}
-	function tearDown() {
-		rm_recursive($this->generate->getPath() ."system");
+	function testIfContentOfUserModelEqualsAString() {
+		$this->generate->create('model', 'user');
+		$string = "<?php\n";
+		$string .= "class User extends Model {\n";
+		$string .= "\tfunction User() {\n";
+		$string .= "\t\tparent::Model();\n";
+		$string .= "\t}\n";
+		$string .= "}\n?>";
+		$this->assertStringEqualsFile('../system/application/models/User.php', $string);
+	}
+	function testIfCreateAFindAllMethodInUserModel() {
+		$this->generate->create('model', 'user', array('findAll'));
+		$string = "<?php\n";
+		$string .= "class User extends Model {\n";
+		$string .= "\tfunction User() {\n";
+		$string .= "\t\tparent::Model();\n";
+		$string .= "\t}\n";
+		$string .= "\tfunction findAll() {\n";
+		$string .= "\t}\n";
+		$string .= "}\n?>";
+		$this->assertStringEqualsFile('../system/application/models/User.php', $string);
 	}
 }
 ?>
