@@ -8,11 +8,11 @@ class BinTest extends PHPUnit_Framework_TestCase {
 		$this->assertFileExists('../bin/cake');
 	}
 	function testIfCanCreateAWelcomeController() {
-		echo exec('php ../bin/cake controller welcome');
+		exec('php ../bin/cake controller welcome');
 		$this->assertFileExists('system/application/controllers/WelcomeController.php');
 	}
 	function testIfCanCreateViewsToWelcomeController() {
-		echo exec('php ../bin/cake controller user index');
+		exec('php ../bin/cake controller user index');
 		$this->assertFileExists('system/application/views/user_controller/index_view.php');
 	}
 	function tearDown() {

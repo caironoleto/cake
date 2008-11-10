@@ -12,6 +12,7 @@ class AllTests {
 		$files = array(
 			$path ."GenerateTest.php",
 			$path ."BinTest.php",
+			$path ."RoutesTest.php",
 		);
 		$suite->addTestFiles($files);
 		return $suite;

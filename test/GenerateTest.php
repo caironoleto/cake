@@ -88,5 +88,9 @@ class GenerateTest extends PHPUnit_Framework_TestCase {
 		$string .= "}\n?>";
 		$this->assertStringEqualsFile('../system/application/models/User.php', $string);
 	}
+	function testReturnStringWithStatusLog() {
+		$this->generate->create('model', 'user', array('findAll'));
+		$this->assertType('string', $this->generate->getMessages());
+	}
 }
 ?>

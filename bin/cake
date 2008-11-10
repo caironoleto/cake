@@ -24,6 +24,7 @@ if (isset($argv[1]) and isset($argv[2])) {
 		}
 	}
 	$generate->create($mode, $name, $methods);
+	print $generate->getMessages();
 }
 else {
 	print "\tUsage: cake controller method1 method2 method3\n";
