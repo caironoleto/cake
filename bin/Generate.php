@@ -7,7 +7,6 @@ class Generate {
 	private $basepath;
 	public $message = '';
 	function Generate() {
-		$this->message .= "cake by Cairo Noleto - http://www.caironoleto.com/\n\n";
 	}
 	function setPath($path) {
 		$this->basepath = $path ."/";
@@ -46,7 +45,7 @@ class Generate {
 					$this->message .= "\t\tsystem/application/controllers/ exists\n";
 				}
 				$class = ucfirst($name);
-				$file = $class .'Controller.php';
+				$file = $name .'Controller.php';
 				if (!file_exists($path .$file)) {
 					$resource = fopen($path .$file, 'w');
 
@@ -141,7 +140,7 @@ class Generate {
 				}
 
 				$class = ucfirst($name);
-				$file = $class .'.php';
+				$file = $name .'.php';
 
 				if (!file_exists($path .$file)) {
 					$resource = fopen($path .$file, 'w');
