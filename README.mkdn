@@ -2,6 +2,12 @@
 
 [cake][cake_url] is a generator to [CodeIgniter Framework][ci_url].
 
+You can use to generate your controllers and models. When you create controllers, *cake* will create views and add routes to your controller.
+
+By default, you can see your routes in `system/application/config/routes.php`.
+
+By default, you can see your views in `system/application/views/`.
+
 ## How to install?
 
 	git clone git://github.com/caironoleto/cake.git /home/yourUser/.cake
@@ -27,6 +33,7 @@
 			system/ exists
 			system/application/ exists
 			system/application/controllers/ exists
+			Add route to HomeController
 			Create system/application/controllers/HomeController.php
 
 	cairo@lt:~/myProject$ cake controller home index
@@ -35,6 +42,7 @@
 			system/ exists
 			system/application/ exists
 			system/application/controllers/ exists
+			Add route to HomeController
 			Add index in HomeController
 			system/application/views/ exists
 			system/application/views/home_controller/ exists

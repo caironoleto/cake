@@ -62,7 +62,7 @@ class Generate {
 						chmod($routes_path, 0775);
 						$this->message .= "\t\tCreate system/application/config/\n";
 					} else {
-						$this->message .= "\t\tsystem/application/config/ exists";
+						$this->message .= "\t\tsystem/application/config/ exists\n";
 					}
 
 					if (!file_exists($routes_path .'routes.php')) {
@@ -71,6 +71,7 @@ class Generate {
 						fwrite($routesresource, '$route["default_controller"] = "welcome";' ."\n");
 						fwrite($routesresource, '$route["scaffolding_trigger"] = "";' ."\n");
 						fwrite($routesresource, "\n");
+						$this->message .= "\t\tAdd default routes\n";
 					} else {
 						$routesresource = fopen($routes_path .'routes.php', 'a');
 						fwrite($routesresource, "\n");
@@ -81,6 +82,7 @@ class Generate {
 					fwrite($routesresource, '$route["' .$name .'/([a-zA-Z]+)/([a-zA-Z0-9 ]+)"] = "' .$name .'Controller/$1/$2";' ."\n");
 					fwrite($routesresource, '$route["' .$name .'/([a-zA-Z]+)/([a-zA-Z0-9 ]+)/([a-zA-Z0-9 ]+)"] = "' .$name .'Controller/$1/$2/$3";' ."\n");
 					fclose($routesresource);
+					$this->message .= "\t\tAdd route to " .$class ."Controller\n";
 
 					if (is_array($methods)) {
 						foreach ($methods as $method) {
