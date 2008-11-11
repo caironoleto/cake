@@ -56,6 +56,32 @@ class Generate {
 					fwrite($resource, "\t\tparent::Controller();\n");
 					fwrite($resource, "\t}\n");
 
+					$routes_path = $this->basepath .'system/application/config/';
+					if (!file_exists($routes_path)) {
+						mkdir($routes_path);
+						chmod($routes_path, 0775);
+						$this->message .= "\t\tCreate system/application/config/\n";
+					} else {
+						$this->message .= "\t\tsystem/application/config/ exists";
+					}
+
+					if (!file_exists($routes_path .'routes.php')) {
+						$routesresource = fopen($routes_path .'routes.php', 'a');
+						fwrite($routesresource, "<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');\n");
+						fwrite($routesresource, '$route["default_controller"] = "welcome";' ."\n");
+						fwrite($routesresource, '$route["scaffolding_trigger"] = "";' ."\n");
+						fwrite($routesresource, "\n");
+					} else {
+						$routesresource = fopen($routes_path .'routes.php', 'a');
+						fwrite($routesresource, "\n");
+					}
+					
+					fwrite($routesresource, '$route["' .$name .'"] = "' .$name .'Controller";' ."\n");
+					fwrite($routesresource, '$route["' .$name .'/([a-zA-Z]+)"] = "' .$name .'Controller/$1";' ."\n");
+					fwrite($routesresource, '$route["' .$name .'/([a-zA-Z]+)/([a-zA-Z0-9 ]+)"] = "' .$name .'Controller/$1/$2";' ."\n");
+					fwrite($routesresource, '$route["' .$name .'/([a-zA-Z]+)/([a-zA-Z0-9 ]+)/([a-zA-Z0-9 ]+)"] = "' .$name .'Controller/$1/$2/$3";' ."\n");
+					fclose($routesresource);
+
 					if (is_array($methods)) {
 						foreach ($methods as $method) {
 
