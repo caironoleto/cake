@@ -10,29 +10,29 @@ class GenerateTest extends PHPUnit_Framework_TestCase {
 	function tearDown() {
 		rm_recursive($this->generate->getPath() ."system");
 	}
-	function testCreateAwelcomeController() {
+	function testCreateAWelcomeController() {
 		$this->generate->create('controller', 'welcome');
 		$this->assertFileExists('../system/application/controllers/welcomeController.php');
 	}
-	function testIfContentOfwelcomeControllerIsWelcomeClass() {
+	function testIfContentOfWelcomeControllerIsWelcomeClass() {
 		$this->generate->create('controller', 'welcome');
 		$string = "<?php\nclass WelcomeController extends Controller {\n\tfunction WelcomeController() {\n\t\tparent::Controller();\n\t}\n}\n?>";
 		$this->assertStringEqualsFile('../system/application/controllers/welcomeController.php', $string);
 	}
-	function testCreateAuserController() {
+	function testCreateAUserController() {
 		$this->generate->create('controller', 'user');
 		$this->assertFileExists('../system/application/controllers/userController.php');
 	}
-	function testCreateAuserControllerAndIndexView() {
+	function testCreateAUserControllerAndIndexView() {
 		$this->generate->create('controller', 'user', array('index'));
 		$this->assertFileExists('../system/application/views/user_controller/index_view.php');
 	}
-	function testIfContentOfuserControllerIsUserClass() {
+	function testIfContentOfUserControllerIsUserClass() {
 		$this->generate->create('controller', 'USER');
 		$string = "<?php\nclass UserController extends Controller {\n\tfunction UserController() {\n\t\tparent::Controller();\n\t}\n}\n?>";
 		$this->assertStringEqualsFile('../system/application/controllers/userController.php', $string);
 	}
-	function testIfCreateAIndexMethodInwelcomeController() {
+	function testIfCreateAIndexMethodInWelcomeController() {
 		$this->generate->create('controller', 'welcome', array('index'));
 		$string = "<?php\n";
 		$string .= "class WelcomeController extends Controller {\n";
@@ -44,7 +44,7 @@ class GenerateTest extends PHPUnit_Framework_TestCase {
 		$string .= "}\n?>";
 		$this->assertStringEqualsFile('../system/application/controllers/welcomeController.php', $string);
 	}
-	function testIfCreateAIndexMethodAndDestroyMethodInwelcomeController() {
+	function testIfCreateAIndexMethodAndDestroyMethodInWelcomeController() {
 		$this->generate->create('controller', 'welcome', array('index', 'destroy'));
 		$string = "<?php\n";
 		$string .= "class WelcomeController extends Controller {\n";

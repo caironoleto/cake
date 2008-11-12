@@ -7,15 +7,26 @@
 require_once('Generate.php');
 $generate = new Generate();
 $generate->setPath($_SERVER['PWD']);
-$options = array('--help');
+$options = array('--help', '--quiet');
 print "cake by Cairo Noleto - http://www.caironoleto.com/\n\n";
+$print = true;
 if (in_array($argv[1], $options)) {
-	echo "\tHelp: You can use cake to generate your controllers and models\n";
-#	exit;
+	switch($argv[1]) {
+		case '--help':
+			echo "\tHelp: You can use cake to generate your controllers and models\n";
+			break;
+		case '--quiet':
+			$print = false;
+			break;
+	}
+	unset($argv[1]);
 }
-if (isset($argv[1]) and isset($argv[2])) {
+foreach($argv as $value) {
+	$params[] = $value;
+}
+if (isset($params[1]) and isset($params[2])) {
 	$methods = array();
-	foreach($argv as $key => $value) {
+	foreach($params as $key => $value) {
 		switch($key) {
 			case 0:
 				break;
@@ -30,9 +41,10 @@ if (isset($argv[1]) and isset($argv[2])) {
 		}
 	}
 	$generate->create($mode, $name, $methods);
-	print $generate->getMessages();
-}
-else {
+	if ($print == true)
+		print $generate->getMessages();
+
+} else {
 	print "\tUsage: cake controller method1 method2 method3\n";
 	print "\tYou can use with\n";
 	print "\t\tcontroller model\n";

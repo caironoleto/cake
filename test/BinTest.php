@@ -80,5 +80,10 @@ class BinTest extends PHPUnit_Framework_TestCase {
 		$string .= "\t\tcontroller model\n";
 		$this->assertEquals($string, $result);
 	}
+	function testIfCanNotShowMessagesWithOptionQuiet() {
+		$result = shell_exec('php ../bin/cake --quiet controller user');
+		$string = "cake by Cairo Noleto - http://www.caironoleto.com/\n\n";
+		$this->assertEquals($string, $result);
+	}
 }
 ?>
