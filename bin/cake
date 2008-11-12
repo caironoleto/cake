@@ -1,19 +1,24 @@
 #!/usr/bin/php
 <?php
-#CodeIgniter Generate
+# CodeIgniter Generate
 #	@author Cairo Noleto at Add4 Comunicação
 #	@site http://www.caironoleto.com/
 #	@email caironoleto@gmail.com
+
 require_once('Generate.php');
 $generate = new Generate();
 $generate->setPath($_SERVER['PWD']);
 $options = array('--help', '--quiet');
-print "cake by Cairo Noleto - http://www.caironoleto.com/\n\n";
 $print = true;
+
+print "cake by Cairo Noleto - http://www.caironoleto.com/\n\n";
+
 if (in_array($argv[1], $options)) {
 	switch($argv[1]) {
 		case '--help':
-			echo "\tHelp: You can use cake to generate your controllers and models\n";
+			print "\tHelp: You can use cake to generate your controllers and models\n";
+			help_message();
+			exit;
 			break;
 		case '--quiet':
 			$print = false;
@@ -21,9 +26,17 @@ if (in_array($argv[1], $options)) {
 	}
 	unset($argv[1]);
 }
+
 foreach($argv as $value) {
 	$params[] = $value;
 }
+
+function help_message() {
+	print "\tUsage: cake controller method1 method2 method3\n";
+	print "\tYou can use with\n";
+	print "\t\tcontroller model\n";
+}
+
 if (isset($params[1]) and isset($params[2])) {
 	$methods = array();
 	foreach($params as $key => $value) {
@@ -43,10 +56,7 @@ if (isset($params[1]) and isset($params[2])) {
 	$generate->create($mode, $name, $methods);
 	if ($print == true)
 		print $generate->getMessages();
-
 } else {
-	print "\tUsage: cake controller method1 method2 method3\n";
-	print "\tYou can use with\n";
-	print "\t\tcontroller model\n";
+	help_message();
 }
 ?>
