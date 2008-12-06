@@ -53,6 +53,40 @@ class Generate {
 		$this->addMessage("\t\tAdd route to " .ucfirst($name) ."Controller\n");
 
 	}
+	function createMethodsController($resource, $methods) {
+		if (is_array($methods)) {
+			foreach ($methods as $method) {
+
+				fwrite($resource, "\tfunction $method() {\n");
+				fwrite($resource, "\t}\n");
+
+				$this->addMessage("\t\tAdd $method in " .$class ."Controller\n");
+				$viewpath = $this->getPath() .'system/application/views/';
+
+				if (!file_exists($viewpath)) {
+					$this->createPath($viewpath);
+					$this->addMessage("\t\tCreate system/application/views/\n");
+				} else {
+					$this->addMessage("\t\tsystem/application/views/ exists\n");
+				}
+
+				$viewpath .= $name ."_controller/";
+				if (!file_exists($viewpath)) {
+					$this->createPath($viewpath);
+					$this->addMessage("\t\tCreate system/application/views/$name" ."_controller/\n");
+				} else {
+					$this->addMessage("\t\tsystem/application/views/$name" ."_controller/ exists\n");
+				}
+
+				$viewfile = $method ."_view.php";
+				$viewresource = fopen($viewpath .$viewfile, 'w');
+				fclose($viewresource);
+				chmod($viewpath .$viewfile, 0775);
+
+				$this->addMessage("\t\tCreate system/application/views/$name" ."_controller/$viewfile\n");
+			}
+		}
+	}
 	function create($what, $name, $methods = null) {
 		$what = strtolower($what);
 		$name = strtolower($name);
@@ -90,39 +124,8 @@ class Generate {
 					fwrite($resource, "\tfunction $class" ."Controller() {\n");
 					fwrite($resource, "\t\tparent::Controller();\n");
 					fwrite($resource, "\t}\n");
-
-					if (is_array($methods)) {
-						foreach ($methods as $method) {
-
-							fwrite($resource, "\tfunction $method() {\n");
-							fwrite($resource, "\t}\n");
-
-							$this->addMessage("\t\tAdd $method in " .$class ."Controller\n");
-							$viewpath = $this->getPath() .'system/application/views/';
-
-							if (!file_exists($viewpath)) {
-								$this->createPath($viewpath);
-								$this->addMessage("\t\tCreate system/application/views/\n");
-							} else {
-								$this->addMessage("\t\tsystem/application/views/ exists\n");
-							}
-
-							$viewpath .= $name ."_controller/";
-							if (!file_exists($viewpath)) {
-								$this->createPath($viewpath);
-								$this->addMessage("\t\tCreate system/application/views/$name" ."_controller/\n");
-							} else {
-								$this->addMessage("\t\tsystem/application/views/$name" ."_controller/ exists\n");
-							}
-
-							$viewfile = $method ."_view.php";
-							$viewresource = fopen($viewpath .$viewfile, 'w');
-							fclose($viewresource);
-							chmod($viewpath .$viewfile, 0775);
-
-							$this->addMessage("\t\tCreate system/application/views/$name" ."_controller/$viewfile\n");
-						}
-					}
+					
+					$this->createMethodsController($resource, $methods);
 
 					fwrite($resource, "}\n");
 					fwrite($resource, "?>");
