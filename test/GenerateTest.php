@@ -1,6 +1,6 @@
 <?php
 require_once 'PHPUnit/Framework.php';
-require_once('helper.php');
+
 class GenerateTest extends PHPUnit_Framework_TestCase {
 	function setUp() {
 		require_once('../bin/Generate.php');

@@ -5,6 +5,7 @@ Created by Cairo Noleto (http://www.caironoleto.com) at Add4 Comunicação (http
 To add a new test, add '$path ."FileTest'sName.php"' in array and run phpunit AllTests.php
 */
 require_once 'PHPUnit/Framework.php';
+require_once('helper.php');
 class AllTests {
 	public static function suite() {
 		$suite = new PHPUnit_Framework_TestSuite();
