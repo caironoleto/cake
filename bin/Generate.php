@@ -20,19 +20,50 @@ class Generate {
 	function addMessage($message) {
 		$this->message .= $message;
 	}
+	function createPath($path) {
+		mkdir($path);
+		chmod($path, 0775);
+	}
+	function createRoutes($name) {
+		$routes_path = $this->getPath() .'system/application/config/';
+		if (!file_exists($routes_path)) {
+			$this->createPath($routes_path);
+			$this->addMessage("\t\tCreate system/application/config/\n");
+		} else {
+			$this->addMessage("\t\tsystem/application/config/ exists\n");
+		}
+
+		if (!file_exists($routes_path .'routes.php')) {
+			$routesresource = fopen($routes_path .'routes.php', 'a');
+			fwrite($routesresource, "<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');\n");
+			fwrite($routesresource, '$route["default_controller"] = "welcome";' ."\n");
+			fwrite($routesresource, '$route["scaffolding_trigger"] = "";' ."\n");
+			fwrite($routesresource, "\n");
+			$this->addMessage("\t\tAdd default routes\n");
+		} else {
+			$routesresource = fopen($routes_path .'routes.php', 'a');
+			fwrite($routesresource, "\n");
+		}
+	
+		fwrite($routesresource, '$route["' .$name .'"] = "' .$name .'Controller";' ."\n");
+		fwrite($routesresource, '$route["' .$name .'/([a-zA-Z]+)"] = "' .$name .'Controller/$1";' ."\n");
+		fwrite($routesresource, '$route["' .$name .'/([a-zA-Z]+)/([a-zA-Z0-9 ]+)"] = "' .$name .'Controller/$1/$2";' ."\n");
+		fwrite($routesresource, '$route["' .$name .'/([a-zA-Z]+)/([a-zA-Z0-9 ]+)/([a-zA-Z0-9 ]+)"] = "' .$name .'Controller/$1/$2/$3";' ."\n");
+		fclose($routesresource);
+		$this->addMessage("\t\tAdd route to " .ucfirst($name) ."Controller\n");
+
+	}
 	function create($what, $name, $methods = null) {
 		$what = strtolower($what);
 		$name = strtolower($name);
 		if (!file_exists($this->getPath() .'system/')) {
-			mkdir($this->getPath() .'system/');
-			chmod($this->getPath() .'system/', 0775);
+			$this->createPath($this->getPath() .'system/');
 			$this->addMessage("\t\tCreate system/\n");
 		} else {
 			$this->addMessage("\t\tsystem/ exists\n");
 		}
 		if (!file_exists($this->getPath() .'system/application/')) {
-			mkdir($this->getPath() .'system/application/');
-			chmod($this->getPath() .'system/application/', 0775);
+			$this->createPath($this->getPath() .'system/application/');
 			$this->addMessage("\t\tCreate system/application/\n");
 		} else {
 			$this->addMessage("\t\tsystem/application/ exists\n");
@@ -41,8 +72,7 @@ class Generate {
 			case 'controller':
 				$path = $this->getPath() .'system/application/controllers/';
 				if (!file_exists($path)) {
-					mkdir($path);
-					chmod($path, 0775);
+					$this->createPath($path);
 					$this->addMessage("\t\tCreate system/application/controllers/\n");
 				} else {
 					$this->addMessage("\t\tsystem/application/controllers/ exists\n");
@@ -50,6 +80,9 @@ class Generate {
 				$class = ucfirst($name);
 				$file = $name .'Controller.php';
 				if (!file_exists($path .$file)) {
+
+					$this->createRoutes($name);
+
 					$resource = fopen($path .$file, 'w');
 
 					fwrite($resource, "<?php\n");
@@ -57,34 +90,6 @@ class Generate {
 					fwrite($resource, "\tfunction $class" ."Controller() {\n");
 					fwrite($resource, "\t\tparent::Controller();\n");
 					fwrite($resource, "\t}\n");
-
-					$routes_path = $this->getPath() .'system/application/config/';
-					if (!file_exists($routes_path)) {
-						mkdir($routes_path);
-						chmod($routes_path, 0775);
-						$this->addMessage("\t\tCreate system/application/config/\n");
-					} else {
-						$this->addMessage("\t\tsystem/application/config/ exists\n");
-					}
-
-					if (!file_exists($routes_path .'routes.php')) {
-						$routesresource = fopen($routes_path .'routes.php', 'a');
-						fwrite($routesresource, "<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');\n");
-						fwrite($routesresource, '$route["default_controller"] = "welcome";' ."\n");
-						fwrite($routesresource, '$route["scaffolding_trigger"] = "";' ."\n");
-						fwrite($routesresource, "\n");
-						$this->addMessage("\t\tAdd default routes\n");
-					} else {
-						$routesresource = fopen($routes_path .'routes.php', 'a');
-						fwrite($routesresource, "\n");
-					}
-					
-					fwrite($routesresource, '$route["' .$name .'"] = "' .$name .'Controller";' ."\n");
-					fwrite($routesresource, '$route["' .$name .'/([a-zA-Z]+)"] = "' .$name .'Controller/$1";' ."\n");
-					fwrite($routesresource, '$route["' .$name .'/([a-zA-Z]+)/([a-zA-Z0-9 ]+)"] = "' .$name .'Controller/$1/$2";' ."\n");
-					fwrite($routesresource, '$route["' .$name .'/([a-zA-Z]+)/([a-zA-Z0-9 ]+)/([a-zA-Z0-9 ]+)"] = "' .$name .'Controller/$1/$2/$3";' ."\n");
-					fclose($routesresource);
-					$this->addMessage("\t\tAdd route to " .$class ."Controller\n");
 
 					if (is_array($methods)) {
 						foreach ($methods as $method) {
@@ -96,8 +101,7 @@ class Generate {
 							$viewpath = $this->getPath() .'system/application/views/';
 
 							if (!file_exists($viewpath)) {
-								mkdir($viewpath);
-								chmod($viewpath, 0775);
+								$this->createPath($viewpath);
 								$this->addMessage("\t\tCreate system/application/views/\n");
 							} else {
 								$this->addMessage("\t\tsystem/application/views/ exists\n");
@@ -105,8 +109,7 @@ class Generate {
 
 							$viewpath .= $name ."_controller/";
 							if (!file_exists($viewpath)) {
-								mkdir($viewpath);
-								chmod($viewpath, 0775);
+								$this->createPath($viewpath);
 								$this->addMessage("\t\tCreate system/application/views/$name" ."_controller/\n");
 							} else {
 								$this->addMessage("\t\tsystem/application/views/$name" ."_controller/ exists\n");
@@ -135,8 +138,7 @@ class Generate {
 				$path = $this->getPath() .'system/application/models/';
 
 				if (!file_exists($path)) {
-					mkdir($path);
-					chmod($path, 0775);
+					$this->createPath($path);
 					$this->addMessage("\t\tCreate system/application/models/\n");
 				} else {
 					$this->addMessage("\t\tsystem/application/models/ exists\n");
