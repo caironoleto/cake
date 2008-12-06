@@ -14,6 +14,7 @@ class AllTests {
 			$path ."GenerateTest.php",
 			$path ."BinTest.php",
 			$path ."RoutesTest.php",
+			$path ."GetANewVersionTest.php",
 		);
 		$suite->addTestFiles($files);
 		return $suite;

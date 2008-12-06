@@ -24,7 +24,8 @@ class Generate {
 		mkdir($path);
 		chmod($path, 0775);
 	}
-	function createRoutes($name) {
+	function createRoutes() {
+		$name = $this->name;
 		$routes_path = $this->getPath() .'system/application/config/';
 		if (!file_exists($routes_path)) {
 			$this->createPath($routes_path);
@@ -54,13 +55,14 @@ class Generate {
 
 	}
 	function createMethodsController($resource, $methods) {
+		$name = $this->name;
 		if (is_array($methods)) {
 			foreach ($methods as $method) {
 
 				fwrite($resource, "\tfunction $method() {\n");
 				fwrite($resource, "\t}\n");
 
-				$this->addMessage("\t\tAdd $method in " .$class ."Controller\n");
+				$this->addMessage("\t\tAdd $method in " .ucfirst($name) ."Controller\n");
 				$viewpath = $this->getPath() .'system/application/views/';
 
 				if (!file_exists($viewpath)) {
@@ -89,7 +91,7 @@ class Generate {
 	}
 	function create($what, $name, $methods = null) {
 		$what = strtolower($what);
-		$name = strtolower($name);
+		$name = $this->name = strtolower($name);
 		if (!file_exists($this->getPath() .'system/')) {
 			$this->createPath($this->getPath() .'system/');
 			$this->addMessage("\t\tCreate system/\n");
