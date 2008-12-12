@@ -23,7 +23,7 @@ class GetANewVersionTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals('v1.7.0', $find->getLatestVersion());
 		$checkout = new Checkout();
 		$this->assertTrue($checkout->setPath('..'));
-		$this->assertTrue($checkout->svnCheckOut('v1.7.0', 'ci_framework'));
+		$this->assertTrue($checkout->svnCheckOut('v1.7.0'));
 		$this->assertFileExists('../source/versions');
 		$this->assertStringEqualsFile("v1.7.0\nv1.6.3\nv1.6.2\nv1.6.1\n", '../source/versions');
 	}
