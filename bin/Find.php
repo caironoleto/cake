@@ -3,7 +3,7 @@ class Find {
 	function Find() {
 		
 	}
-	public function getAllVersions() {
+	public function findVersions() {
 		$resource = curl_init();
 		curl_setopt($resource, CURLOPT_URL, "http://dev.ellislab.com/svn/CodeIgniter/tags/");
 		curl_setopt($resource, CURLOPT_HEADER, 0);
@@ -21,8 +21,13 @@ class Find {
 		}
 		return $versions;
 	}
+	public function getAllVersions() {
+		$versions = $this->findVersions();
+		$versions = implode("\n", $versions);
+		return $versions;
+	}
 	public function getLatestVersion() {
-		$versions = $this->getAllVersions();
+		$versions = $this->findVersions();
 		return array_pop($versions);
 	}
 }
