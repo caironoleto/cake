@@ -24,7 +24,7 @@ class Checkout {
 			mkdir($this->getPath() ."source/$version");
 			chmod($this->getPath(), 0775);
 		}
-		shell_exec("svn checkout http://dev.ellislab.com/svn/CodeIgniter/tags/$version $this->getPath()source/$version");
+		shell_exec("svn checkout http://dev.ellislab.com/svn/CodeIgniter/tags/" .$version ." " .$this->getPath() ."source/" .$version);
 		return true;
 	}
 
