@@ -72,20 +72,21 @@ class Generate {
 					$this->addMessage("\t\tsystem/application/views/ exists\n");
 				}
 
-				$viewpath .= $name ."_controller/";
+				$viewpath .= "$name/";
 				if (!file_exists($viewpath)) {
 					$this->createPath($viewpath);
-					$this->addMessage("\t\tCreate system/application/views/$name" ."_controller/\n");
+					$this->addMessage("\t\tCreate system/application/views/$name\n");
 				} else {
-					$this->addMessage("\t\tsystem/application/views/$name" ."_controller/ exists\n");
+					$this->addMessage("\t\tsystem/application/views/$name exists\n");
 				}
 
-				$viewfile = $method ."_view.php";
+				$viewfile = "$method.php";
 				$viewresource = fopen($viewpath .$viewfile, 'w');
+				fwrite($viewresource, "You can find me in system/application/views/$name/$viewfile\n");
 				fclose($viewresource);
 				chmod($viewpath .$viewfile, 0775);
 
-				$this->addMessage("\t\tCreate system/application/views/$name" ."_controller/$viewfile\n");
+				$this->addMessage("\t\tCreate system/application/views/$name/$viewfile\n");
 			}
 		}
 	}

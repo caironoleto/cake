@@ -54,8 +54,8 @@ class BinTest extends PHPUnit_Framework_TestCase {
 		$string .= "\t\tAdd route to UserController\n";
 		$string .= "\t\tAdd index in UserController\n";
 		$string .= "\t\tCreate system/application/views/\n";
-		$string .= "\t\tCreate system/application/views/user_controller/\n";
-		$string .= "\t\tCreate system/application/views/user_controller/index_view.php\n";
+		$string .= "\t\tCreate system/application/views/user\n";
+		$string .= "\t\tCreate system/application/views/user/index.php\n";
 		$string .= "\t\tCreate system/application/controllers/userController.php\n\n";
 		$this->assertEquals($string, $result);
 	}
