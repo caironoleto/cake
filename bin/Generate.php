@@ -60,6 +60,7 @@ class Generate {
 			foreach ($methods as $method) {
 
 				fwrite($resource, "\tfunction $method() {\n");
+				fwrite($resource, "\t\t" .'$this->load->view("' ."$name/$method" .'");' ."\n");
 				fwrite($resource, "\t}\n");
 
 				$this->addMessage("\t\tAdd $method in " .ucfirst($name) ."Controller\n");

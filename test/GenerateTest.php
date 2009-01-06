@@ -53,6 +53,7 @@ class GenerateTest extends PHPUnit_Framework_TestCase {
 		$string .= "\t\tparent::Controller();\n";
 		$string .= "\t}\n";
 		$string .= "\tfunction index() {\n";
+		$string .= "\t\t" .'$this->load->view("welcome/index");' ."\n";
 		$string .= "\t}\n";
 		$string .= "}\n?>";
 		$this->assertStringEqualsFile('../system/application/controllers/welcomeController.php', $string);
@@ -66,8 +67,10 @@ class GenerateTest extends PHPUnit_Framework_TestCase {
 		$string .= "\t\tparent::Controller();\n";
 		$string .= "\t}\n";
 		$string .= "\tfunction index() {\n";
+		$string .= "\t\t" .'$this->load->view("welcome/index");' ."\n";
 		$string .= "\t}\n";
 		$string .= "\tfunction destroy() {\n";
+		$string .= "\t\t" .'$this->load->view("welcome/destroy");' ."\n";
 		$string .= "\t}\n";
 		$string .= "}\n?>";
 		$this->assertStringEqualsFile('../system/application/controllers/welcomeController.php', $string);
