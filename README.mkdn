@@ -45,8 +45,8 @@ By default, you can see your views in `system/application/views/`.
 			Add route to HomeController
 			Add index in HomeController
 			system/application/views/ exists
-			system/application/views/home_controller/ exists
-			Create system/application/views/home_controller/index_view.php
+			system/application/views/home/ exists
+			Create system/application/views/home/index.php
 			Create system/application/controllers/HomeController.php
 
 	cairo@lt:~/myProject$ cake model user
